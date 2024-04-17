@@ -3,11 +3,15 @@ import { useState, useEffect } from 'react';
 
 
 function App() {
-  const [data, setData] = useState('')
+  const [data, setData] = useState([])
   useEffect(() => {
-    fetch('/imdb-data')
-      .then((res) => res.json())
-      .then((data) => setData(data.dataset))
+    fetch('/api/imdb-data')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.dataset) {
+          setData(data.dataset)
+        }
+      })
       .catch((error) => console.log(error))
   }, [])
 
@@ -15,7 +19,20 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Welcome to my App using React and Flask</h1>
-        <p>{data || 'Loading data...'}</p>
+        {data ? (
+          <ul>
+            {data.map((item, index) => (
+              <li key={index}>
+                {'IMDb Rating: ' + item['IMDB Rating']} {'Name of Movie: ' 
+                + item['Movie Name']} {'Movie Rank: ' 
+                + item['Movie Rank']} {'Year of release: ' 
+                + item['Year of Release']}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Loading data...</p>
+        )}
       </header>
     </div>
   );
