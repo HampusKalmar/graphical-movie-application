@@ -1,6 +1,8 @@
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'
 import { Bar } from 'react-chartjs-2';
 import { useState, useEffect } from 'react';
+import '../App.css'
+
 ChartJS.register(
   CategoryScale, 
   LinearScale,
@@ -54,8 +56,7 @@ function BarChart() {
   };
  
   return (
-    <div class='size-full...'>
-      <h2>Bar Chart</h2>
+    <div className='chart-container'>
       {data.length ? <Bar data={chartData} options={options}/> : <p>No data to display</p>}
     </div>
   );
