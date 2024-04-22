@@ -5,12 +5,10 @@ import { useState, useEffect } from 'react';
 function App() {
   const [data, setData] = useState([])
   useEffect(() => {
-    fetch('/api/imdb-data')
+    fetch('/movie-data')
       .then(res => res.json())
       .then(data => {
-        if (data && data.dataset) {
-          setData(data.dataset)
-        }
+        setData(data)
       })
       .catch((error) => console.log(error))
   }, [])
