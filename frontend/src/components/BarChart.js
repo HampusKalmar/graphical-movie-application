@@ -14,15 +14,16 @@ ChartJS.register(
 
 function BarChart() {
   const [data, setData] = useState([])
+  const [limit, setLimit] = useState(10)
 
   useEffect(() => {
-    fetch('/movie-data')
+    fetch(`/movie-data?limit=${limit}`)
       .then(res => res.json())
       .then(data => {
         setData(data)
       })
       .catch((error) => console.log(error))
-  }, [])
+  }, [limit])
 
   const chartData = {
     labels: data.map(item => item['Movie Name']),
@@ -57,6 +58,14 @@ function BarChart() {
  
   return (
     <div className='chart-container'>
+      <select value={limit} onChange={e => setLimit(e.target.value)}>
+        <option value='10'>Top 10 Movies</option>
+        <option value='50'>Top 50 Movies</option>
+        <option value='100'>Top 100 Movies</option>
+        <option value='200'>Top 500 Movies</option>
+        <option value='1000'>Top 1000 Movies</option>
+        <option value=''>All Movies</option>
+      </select>
       {data.length ? <Bar data={chartData} options={options}/> : <p>No data to display</p>}
     </div>
   );
