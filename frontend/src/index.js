@@ -8,6 +8,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
+    <footer className='main-footer'>
+      Created using Python, FastAPI, Pandas, ChartJS, JavaScript and React. 
+    </footer>
   </React.StrictMode>
 );
 
