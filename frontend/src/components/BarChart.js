@@ -16,15 +16,16 @@ function BarChart() {
   const [data, setData] = useState([])
   const [search, setSearch] = useState('')
   const [limit, setLimit] = useState(10)
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
-    fetch(`/movie-data?search=${encodeURIComponent(search)}&limit=${parseInt(limit)}`)
+    fetch(`/movie-data?search=${encodeURIComponent(search)}&limit=${parseInt(limit)}&page=${currentPage}`)
       .then(res => res.json())
       .then(data => {
         setData(data)
       })
       .catch((error) => console.log(error))
-  }, [search, limit])
+  }, [search, limit, currentPage])
 
   const chartData = {
     labels: data.map(item => item['Movie Name']),
@@ -47,7 +48,6 @@ function BarChart() {
       },
       title: {
         display: true,
-        text: 'IMDB Ratings by Movie'
       }
     },
     scales: {
@@ -60,7 +60,6 @@ function BarChart() {
   return (
     <div className='chart-container'>
       <input 
-      type='text' 
       value={search} 
       onChange={e => setSearch(e.target.value)} 
       placeholder='Search for a movie...'
@@ -74,6 +73,9 @@ function BarChart() {
         <option value='1000'>1000 Movies</option>
         <option value='2000'>All Movies</option>
       </select>
+      <button onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)}>Previous</button>
+      <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+      <span className='page-info'>Page {currentPage}</span>
       {data.length ? <Bar data={chartData} options={options}/> : <p>No movies to display</p>}
     </div>
   );

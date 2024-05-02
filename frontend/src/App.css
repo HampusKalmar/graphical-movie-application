@@ -35,6 +35,13 @@
     padding: 30px;
   }
 
+  .chart-container .page-info {
+    text-align: right;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px;
+  }
+
   .main-title {
     position: absolute;
     top: 0;

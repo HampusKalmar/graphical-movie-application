@@ -5,8 +5,8 @@ from dependencies import read_movie_data
 router = APIRouter()
 
 @router.get("/movie-data")
-def get_movie_data(search: str = Query(None), limit: int = Query(10, ge=1, le=2000)):
-    data, error = read_movie_data(DATA_FILE)
+def get_movie_data(search: str = Query(None), page: int = Query(1, ge=1), limit: int = Query(10, ge=1, le=2000)):
+    data, error = read_movie_data(DATA_FILE, page=page, limit=limit, search=search)
     
     if error is not None:
         raise HTTPException(status_code=500, detail=error)
