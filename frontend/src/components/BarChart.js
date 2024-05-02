@@ -65,7 +65,7 @@ function BarChart() {
       placeholder='Search for a movie...'
       />
 
-      <select value={limit} onChange={e => setLimit(e.target.value)}>
+      <select className='movie-options' value={limit} onChange={e => setLimit(e.target.value)}>
         <option value='10'>10 Movies</option>
         <option value='50'>50 Movies</option>
         <option value='100'>100 Movies</option>
@@ -73,8 +73,8 @@ function BarChart() {
         <option value='1000'>1000 Movies</option>
         <option value='2000'>All Movies</option>
       </select>
-      <button onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)}>Previous</button>
-      <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+      <button className='page-button' onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)}>Previous</button>
+      <button className='page-button' onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
       <span className='page-info'>Page {currentPage}</span>
       {data.length ? <Bar data={chartData} options={options}/> : <p>No movies to display</p>}
     </div>

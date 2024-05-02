@@ -35,8 +35,16 @@
     padding: 30px;
   }
 
+  .chart-container .page-button {
+    margin: 2px;
+  }
+
+  .chart-container .movie-options {
+    margin-left: 2px;
+  }
+
   .chart-container .page-info {
-    text-align: right;
+    text-align: center;
     font-size: 24px;
     font-weight: bold;
     margin: 10px;
