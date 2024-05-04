@@ -19,7 +19,8 @@ function BarChart() {
   const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
-    fetch(`/movie-data?search=${encodeURIComponent(search)}&limit=${parseInt(limit)}&page=${currentPage}`)
+    const apiUrl = process.env.REACT_APP_BACKEND_URL
+    fetch(`${apiUrl}/movie-data?search=${encodeURIComponent(search)}&limit=${parseInt(limit)}&page=${currentPage}`)
       .then(res => res.json())
       .then(data => {
         setData(data)
