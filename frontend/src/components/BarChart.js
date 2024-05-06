@@ -12,6 +12,12 @@ ChartJS.register(
   Title
 );
 
+/**
+ * Component representing a bar chart displaying imdb movie ratings.
+ * This component fetches data from the backend and displays it in a bar chart.
+ * 
+ * @returns {JSX.Element} BarChart component.
+ */
 function BarChart() {
   const [data, setData] = useState([])
   const [search, setSearch] = useState('')

@@ -1,7 +1,11 @@
 import './App.css'
 import BarChart from './components/BarChart';
 
-
+/**
+ * Component representing the main application.
+ *
+ * @returns {JSX.Element} App component.
+ */
 function App() {
   return (
     <div className="App">
