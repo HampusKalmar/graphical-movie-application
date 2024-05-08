@@ -1,6 +1,6 @@
 # Project Title
 
-IMDb Movie Data Analysis
+Graphical imdb application.
 
 ## Project Description
 
@@ -24,3 +24,6 @@ Python
 
 I have added pagination to my application so it does not load all the data at once. I have also added a search bar that allows users to search for a specific movie.
 
+## Images
+
+![image](/imdb-movie-graph.png)

@@ -27,19 +27,29 @@ function BarChart() {
   useEffect(() => {
     const apiUrl = process.env.REACT_APP_BACKEND_URL
     fetch(`${apiUrl}/movie-data?search=${encodeURIComponent(search)}&limit=${parseInt(limit)}&page=${currentPage}`)
-      .then(res => res.json())
-      .then(data => {
-        setData(data)
-      })
-      .catch((error) => console.log(error))
-  }, [search, limit, currentPage])
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(data => {
+      setData(data);
+    })
+    .catch((error) => {
+      console.error("Fetch error:", error);
+      setData([]); 
+    });
+  }, [search, limit, currentPage]);
 
   const chartData = {
-    labels: data.map(item => item['Movie Name']),
+    labels: Array.isArray(data) ? data.map(item => item['Movie Name']) : [],
     datasets: [
       {
         label: 'IMDB Rating',
-        data: data.map(item => item['IMDB Rating']),
+        data: Array.isArray(data) ? data.map(item => item['IMDB Rating']) : [],
+        // Gammal lösning:
+        // data.map(item => item['IMDB Rating']),
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
